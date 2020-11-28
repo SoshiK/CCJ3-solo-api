@@ -6,16 +6,32 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29",
+    "typeorm-seeding": "^1.6.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "ts-node-dev -r dotenv/config --respawn src/backend/index.ts",
+    "start-server": "ts-node -r dotenv/config src/backend/index.ts",
+    "orm": "ts-node -r dotenv/config ./node_modules/typeorm/cli.js --config src/backend/ormconfig.ts",
+    "makeMigrations": "yarn orm migration:generate",
+    "migrate": "yarn orm migration:run",
+    "rollback": "yarn orm migration:revert",
+    "seeder": "ts-node -r dotenv/config ./node_modules/typeorm-seeding/dist/cli.js",
+    "seed": "yarn seeder --configName src/backend/ormconfig.ts seed"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +50,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.1.2"
   }
 }
